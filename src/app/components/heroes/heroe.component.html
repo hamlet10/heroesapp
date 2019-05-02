@@ -12,7 +12,9 @@
         <div class="form-group">
           <label>Nombre</label>
           <input
+            [(ngModel)]="heroe.nombre"
             type="text"
+            name="nombre"
             class="form-control"
             placeholder="nombre del heroe"
             required
@@ -21,7 +23,7 @@
 
         <div class="form-group">
           <label>Casa</label>
-          <select class="form-control">
+          <select class="form-control" [(ngModel)]="heroe.casa" name="casa">
             <option value="Mavel">Marvel</option>
             <option value="DC">DC</option>
           </select>
@@ -29,8 +31,21 @@
 
         <div class="form-group">
           <label>Bio</label>
-          <textarea type="text" class="form-control"></textarea>
+          <textarea
+            [(ngModel)]="heroe.bio"
+            name="bio"
+            type="text"
+            class="form-control"
+          ></textarea>
         </div>
+
+        <button
+          [disabled]="!forma.valid"
+          type="submit"
+          class="btn btn-outline-primary"
+        >
+          Guardar
+        </button>
       </form>
     </div>
   </div>
