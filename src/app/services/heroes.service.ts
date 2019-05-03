@@ -50,4 +50,14 @@ export class HeroesService {
   getHeroes() {
     return this.http.get(this.heroesURL).pipe(map(res => res));
   }
+
+  borrarHeroe(key$: string) {
+    let url = `${this.heroeURL}/${key$}.json`;
+
+    let headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+
+    return this.http.delete(url, { headers }).pipe(map(res => res));
+  }
 }
