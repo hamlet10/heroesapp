@@ -24,9 +24,14 @@ export class HeroeComponent implements OnInit {
     private router: Router,
     private _activatedRoute: ActivatedRoute
   ) {
-    this._activatedRoute.params.subscribe(
-      parametros => (this.id = parametros["id"])
-    );
+    this._activatedRoute.params.subscribe(parametros => {
+      this.id = parametros["id"];
+      if (this.id !== "nuevo") {
+        this._heroeService
+          .getHeroe(this.id)
+          .subscribe((heroe: Heore) => (this.heroe = heroe));
+      }
+    });
   }
 
   ngOnInit() {}

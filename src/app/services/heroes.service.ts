@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Heore } from "../interfaces/heroe.interface";
 import { map } from "rxjs/operators";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -12,7 +13,7 @@ export class HeroesService {
 
   constructor(private http: HttpClient) {}
 
-  nuevoHeroe(heroe: Heore) {
+  nuevoHeroe(heroe: Heore): Observable<any> {
     let body = JSON.stringify(heroe);
     let headers = new HttpHeaders({
       "Content-Type": "application/json"
@@ -39,5 +40,14 @@ export class HeroesService {
         return res;
       })
     );
+  }
+
+  getHeroe(id: string) {
+    let url: string = `${this.heroeURL}/${id}.json`;
+    return this.http.get(url).pipe(map(res => res));
+  }
+
+  getHeroes() {
+    return this.http.get(this.heroesURL).pipe(map(res => res));
   }
 }
